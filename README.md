@@ -1,4 +1,7 @@
-# DEVision.js
+<p align="center">
+  <img src="devision.png"/>
+</p>
+
 DEVision is intended as a drop-in replacement for console.log, with the following features:
  - Fast
  - Isomorphic
@@ -18,16 +21,64 @@ DEVision is intended as a drop-in replacement for console.log, with the followin
 ## Solution ##
  - An improved console.log replacement allowing the developer to decide (at run-time)* what will be logged based on both priority level & user-defined scope with the ability to track/snapshot variable values and test their values.
 
-# DEVision.js Usage #
-## DEVision.js Setup ##
-#### DEVision.js Usage in Node.js
+
+# DEVision.js Setup #
+#### Usage in Node.js
 ```js
-const dev = require('DEVision.js');
+const dev = require(devision.js);
 ```
-#### DEVision.js Usage in Front-End
+#### Usage in Front-End
+```html
+<head>
+    <script src="../devision/linkedList.js"></script>
+    <script src="../devision/testViewHTML.js"></script>
+    <script src="../devision/testView.js"></script>
+    <script src="../devision/devision.js"></script>
+</head>
+```
+
+# DEVision.js HowTo #
+## Usage in General ☺
+In fullfilling DEVision's primary purpose of being a drop-in replacement for ```console.log``` it is easiest to think of it as a Log Butler that takes care of your diagnostic household.  As is the Butler, it will be the gatekeeper for access to your logs.  There are two primary methods (during runtime) which allow you to control your diagnostic data flow:
+```
+    dev.currentPriority = 0;
+    dev.currentScope = ['global', 'appRunTime', 'dataIO', 'foo', ];
+```
+**```currentPriority```** is a threshold for logging without semantic (context) info beyond the severity of the message to be logged.  The implicit (automatic) default level for both ```dev.currentPriority``` && ```dev.log(...)``` is 0 for all logged data.  Therefore, should you use only ```dev.log(...)``` without specifying a priority (as the second argument) you will be able to turn off **all** console logs by simply setting:
+```
+    dev.currentPriority = 1;
+```
+... this value can be changed either at the terminal in your application, or if on the front end, in a dynamically loaded HTML interface.
+**```currentScope```** is similarly a permissive filter for your data...  it will allow any data to be displayed that contains the same scope tag(s) as currently within the ```dev.currentScope[]``` array to be displayed.
+Let's look at a very simple example:
 ```js
-const dev = require('DEVision.js');
+dev.log("Developer Debug Message");
+dev.log("Database Connection Successful <*important status update*>", 13, 'db');
+dev.log("File Write Failure <*critical alert/error*>", 42, ['error', 'devOps']);
+dev.log("Database Connection Failure <*critical alert/error*>", 42, ['error', 'db', 'network']);
 ```
+Given the defaults of ```currentPriority===0``` && ```currentScope===[]``` the output would be:
+```js
+Developer Debug Message
+File Write Failure <*critical alert/error*>
+Database Connection Successful <*important status update*>
+Database Connection Failure <*critical alert/error*>
+```
+Given ```currentPriority===42``` && ```currentScope===[]``` the output would be:
+```js
+File Write Failure <*critical alert/error*>
+Database Connection Failure <*critical alert/error*>
+```
+Given ```currentPriority===99``` && ```currentScope===['db']``` the output would be:
+```js
+Database Connection Successful <*important status update*>
+Database Connection Failure <*critical alert/error*>
+```
+**...** noting that we can achieve the same "goal" of only seeing the "high priority" items in the second & third examples; however, the first shows only by severity (both file && db) whereas the latter only shows based upon the contextual 'db' scope.
+
+
+
+
 ## DEVision.js API
 ### dev.log(...) → drop-in replacement for console.log(...)
 ```js
@@ -104,56 +155,4 @@ dev.JSp(...);
 ### dev.vw() → Launch dev Viewer
 ```js
 dev.vw(...);
-```
-
-## nnCL HowTo ##
-#### nnCL Usage in General ☺
-In fullfilling nnCL's primary purpose of being a drop-in replacement for ```console.log``` it is easiest to think of it as a Log Butler that takes care of your diagnostic household.  As is the Butler, it will be the gatekeeper for access to your logs.  There are two primary methods (during runtime) which allow you to control your diagnostic data flow:
-```
-    nnCL.currentPriority = 0;
-    nnCL.currentScope = ['global', 'appRunTime', 'dataIO', 'foo', ];
-```
-**```currentPriority```** is a threshold for logging without semantic (context) info beyond the severity of the message to be logged.  The implicit (automatic) default level for both ```nnCL.currentPriority``` && ```nnCL.log(...)``` is 0 for all logged data.  Therefore, should you use only ```nnCL.log(...)``` without specifying a priority (as the second argument) you will be able to turn off **all** console logs by simply setting:
-```
-    nnCL.currentPriority = 1;
-```
-... this value can be changed either at the terminal in your application, or if on the front end, in a dynamically loaded HTML interface.
-**```currentScope```** is similarly a permissive filter for your data...  it will allow any data to be displayed that contains the same scope tag(s) as currently within the ```nnCL.currentScope[]``` array to be displayed.
-Let's look at a very simple example:
-```js
-nnCL.log("Developer Debug Message");
-nnCL.log("Database Connection Successful <*important status update*>", 13, 'db');
-nnCL.log("File Write Failure <*critical alert/error*>", 42, ['error', 'devOps']);
-nnCL.log("Database Connection Failure <*critical alert/error*>", 42, ['error', 'db', 'network']);
-```
-Given the defaults of ```currentPriority===0``` && ```currentScope===[]``` the output would be:
-```js
-Developer Debug Message
-File Write Failure <*critical alert/error*>
-Database Connection Successful <*important status update*>
-Database Connection Failure <*critical alert/error*>
-```
-Given ```currentPriority===42``` && ```currentScope===[]``` the output would be:
-```js
-File Write Failure <*critical alert/error*>
-Database Connection Failure <*critical alert/error*>
-```
-Given ```currentPriority===99``` && ```currentScope===['db']``` the output would be:
-```js
-Database Connection Successful <*important status update*>
-Database Connection Failure <*critical alert/error*>
-```
-**...** noting that we can achieve the same "goal" of only seeing the "high priority" items in the second & third examples; however, the first shows only by severity (both file && db) whereas the latter only shows based upon the contextual 'db' scope.
-#### nnCL Usage in Node.js
-```js
-const nnCL = require(nncl.js);
-```
-#### nnCL Usage in Front-End
-```html
-<head>
-    <script src="../nncl/linkedList.js"></script>
-    <script src="../nncl/testViewHTML.js"></script>
-    <script src="../nncl/testView.js"></script>
-    <script src="../nncl/nnCL.js"></script>
-</head>
 ```
