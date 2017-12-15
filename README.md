@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="devision.png"/>
+  <img src="DEVision.png"/>
 </p>
 
 DEVision is intended as a drop-in replacement for console.log, with the following features:
