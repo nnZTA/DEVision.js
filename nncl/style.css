@@ -1,0 +1,203 @@
+* {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+body {
+  margin: 0;
+  height:auto;
+}
+#addScopeForm {visibility: hidden;}
+#addTrackForm {visibility:hidden;}
+#container {
+  border: 1px solid #67ceca;
+  opacity: 1;
+  background-color: #67ceca;
+  color:black;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  margin-right: auto;    
+  margin-left: auto;  
+  width:auto;  
+}
+#containerHeader {
+  overflow: hidden;
+  background-color: #67ceca;
+}
+#containerheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #67ceca;
+  color: black;
+  text-align: center;
+}
+#mini {
+  overflow: hidden;
+  background-color: white;
+  height:auto;
+  min-width:175px;
+}
+#miniDiv {background-color: white;}
+.miniButton {
+  float: right;
+  background-color: #67ceca;
+}
+#page {
+  overflow:none;
+  min-width:175px;
+}
+#innerPage {
+  opacity: 1;
+  overflow:auto;
+  min-width:175px;
+}
+/* Style the tab */
+#tabRibbon {
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  white-space: nowrap;
+  overflow: auto;
+  min-width:175px;
+  width:auto;
+  max-width:inherit;
+}
+/* Style the buttons inside the tab */
+#tabRibbon.button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  overflow: scroll;
+}
+.closeNavButton {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  display:inline-block;
+}
+.closeRowButton {
+  float:right;background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+.statusMessage {color:red;}
+/* Style the tab content */
+.tabcontent {
+  margin-top: -20px;
+  display: none;
+  padding: 12px 12px;
+  /* height: 275px; */
+  background-color: white;
+  overflow: auto;
+  opacity: 1;
+  height:auto;
+}
+.tablinks.button {
+  display: inline-block;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  margin-right: 2px;
+  transition: 0.3s;
+  font-size: 17px;
+  background-color: #b1dddc;
+}
+.tablinks.button:hover {background-color: #67ceca;}
+/* Create an active/current tablink class */
+.tablinks.button.active {
+  background-color: #67ceca;
+}
+tr {
+  color: black;
+  word-wrap: break-word;
+  outline: thin solid black;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+}
+table {
+  border-collapse:collapse; 
+  table-layout:fixed;
+  width:100%;
+  /* width:400px; */
+  font-size: 62.5%;
+}
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+table td {
+  border:solid 1px #fab; 
+  word-wrap:break-word;
+}
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #67ceca;
+}
+table th.RowCount, table td.RowCount {
+  width: 25px;
+  text-align: center;
+}
+table th.TimeStamp, table td.TimeStamp {
+  width: 90px;
+  text-align: right;
+}
+table th.LogData, table td.LogData {
+}
+tr:nth-child(even){background-color: #f2f2f2;}
+tr:hover {background-color: #ddd;}
+/*Format Scope Input Fieldcolor*/
+.configTabForm {background-color: #679cce;}
+.configTabForm:focus {background-color: #99ceff;}
+.configTabForm:hover{background-color: #99ceff;}
+/*Change background color of tabs made from Add Scope Input on active,hover */
+.tablinks.button.addTabFormClass {background-color:#679cce;}
+.tablinks.button.addTabFormClass.active {background-color:#99ceff;}
+.tablinks.button.addTabFormClass:hover {background-color:#99ceff;}
+/*Formats Track Input Field color*/
+.configTrackForm {background-color:#679cce;}
+.configTrackForm:focus{background-color:#99ceff;}
+.configTrackForm:hover {background-color:#99ceff;}
+/* Formats background color of tabs made from Add Track Input on active,hover */
+.tablinks.button.addTrackFormClass {background-color:#679cce;}
+.tablinks.button.addTrackFormClass.active {background-color:#99ceff;}
+.tablinks.button.addTrackFormClass:hover {background-color:#99ceff;}
+/*Formats runtimeConfigForm Input Field color*/
+.runtimeConfigForm {background-color: rgba(255, 255, 0, 0.25);}
+.runtimeConfigForm:focus{background-color: rgba(255, 255, 0, 0.50);}
+.runtimeConfigForm:hover{background-color: rgba(255, 255, 0, 0.50);}
+.scopeButton{
+  margin-top: 3px;
+  margin-left: 25px;
+}
+#scopeDiv {
+  visibility: hidden;
+  margin-top: 5px;
+  /* margin-left: 5px; */
+}
+/*Formats small draggable square*/
+#handle {
+  background-color: #727272;
+  width: 10px;
+  height: 10px;
+  cursor: se-resize;
+  position:absolute;
+  right: 0;
+  bottom: 0;
+}
+#footerNav {
+  height:15px;
+  display:flex;
+  justify-content: center;
+  /* text-align: center; */
+  margin-bottom: 10px;
+}

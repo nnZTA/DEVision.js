@@ -1,0 +1,29 @@
+{
+  "name": "devision.js",
+  "version": "1.0.0",
+  "description": "A dev tool to track your application's state at run-time!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "export": "node ./nncl/exportTests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nnZTA/DEVision.js.git"
+  },
+  "author": "ZTA",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nnZTA/DEVision.js/issues"
+  },
+  "homepage": "https://github.com/nnZTA/DEVision.js#readme",
+  "dependencies": {
+  "fs": "0.0.1-security",
+  "path": "^0.12.7",
+  },
+  "DEVision Notes": {
+    "tested on node versions": "^9.2.0",
+    "tested on os versions": "Win10, MacOS",
+    "tested on chrome versions": "62.0.3202.94"
+  }
+}

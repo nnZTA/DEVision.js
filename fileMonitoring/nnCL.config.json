@@ -1,0 +1,5 @@
+{ 
+  "priority": "0",
+  "watch": "WATCHING",
+  "extensions": [".js", ".jsx"]
+}
