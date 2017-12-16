@@ -127,8 +127,6 @@ function exportTestCases(srcFile, fileContent) {
 
       // head/tail exists and head is before tail: (GRAB INBETWEEN TO EXPORT then slice)
     } else if ((head !== -1) && (tail !== -1) && (head < tail)) {
-      /* EXPORTING LOGIC GOES HERE :  >>>>>>>> */
-
       let relevant = string.slice(head + headLength, tail).slice(0, -1);
       let currTestObj = relevant.slice(0, relevant.indexOf(','));
       relevant = relevant.slice(relevant.indexOf(',') + 1);
@@ -161,7 +159,7 @@ function exportTestCases(srcFile, fileContent) {
         if (testCase.type === 'equal' || testCase.type === 'notEqual' || testCase.type === 'deepEqual' || testCase.type === 'notDeepEqual' || testCase.type === 'deepLooseEqual' || testCase.type === 'notDeepLooseEqual') {
           outstream.write(`\n\tt.${testCase.type}(srcFile.${currTestObj}(${JSON.stringify(testCase.input)}), ${JSON.stringify(testCase.expected)}, "${msg}");`);
         }
-        if (testCase.type === 'ok' || testCase.type === 'notOk') outstream.write(`\n\tt.${testCase.type}(${JSON.stringify(testCase.value)}, "${msg}");`);
+        if (testCase.type === 'ok' || testCase.type === 'notOk') outstream.write(`\n\tt.${testCase.type}(${JSON.stringify(testCase.input)}, "${msg}");`);
         if (testCase.type === 'error') outstream.write(`\n\tt.${testCase.type}((${JSON.stringify(testCase.e)}), "${msg}");`);
         if (testCase.type === 'comment') outstream.write(`\n\tt.${testCase.type}("${msg}");`);
       }

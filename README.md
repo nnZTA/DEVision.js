@@ -15,9 +15,13 @@ DEVision is intended as a drop-in replacement for console.log, with the followin
 - [Overview](#overview)
 - [Setup](#setup)
 - [Usage](#usage)
-- [Documentations](#api)
+- [Documentations](#documentation)
+    - [Main API](#api)
+    - [Export Test Scripts](#export)
+    - [Utilities](#utils)
 - [More](#contributing)
 
+<br>
 
 # <a name="overview"></a>DEVision.js Overview #
 ## Problem ##
@@ -30,11 +34,12 @@ DEVision is intended as a drop-in replacement for console.log, with the followin
 ## Solution ##
  - An improved console.log replacement allowing the developer to decide (at run-time)* what will be logged based on both priority level & user-defined scope with the ability to track/snapshot variable values and test their values.
 
+<br>
 
 # <a name="setup"></a>DEVision.js Setup #
 #### Setup in Node.js
 ```js
-const dev = require(devision.js);
+const dev = require("devision.js");
 ```
 #### Setup in Front-End
 ```html
@@ -45,6 +50,7 @@ const dev = require(devision.js);
     <script src="../devision/devision.js"></script>
 </head>
 ```
+<br><br>
 
 # <a name="usage"></a>DEVision.js HowTo #
 ## Usage in General ☺
@@ -85,8 +91,7 @@ Database Connection Failure <*critical alert/error*>
 ```
 **...** noting that we can achieve the same "goal" of only seeing the "high priority" items in the second & third examples; however, the first shows only by severity (both file && db) whereas the latter only shows based upon the contextual 'db' scope.
 
-
-
+<br><br><br>
 
 ## <a name="api"></a>DEVision.js API
 ### dev.log(...) → drop-in replacement for console.log(...)
@@ -135,24 +140,133 @@ dev.trace(...);
 ```js
 dev.track(...);
 ```
-### dev.test(...) → used to generate Tape Test files (and in the future, possibly code coverage)
-```js
-dev.test(testObj, dev.end);
-```
-### dev.end → property used by dev.test(...)
-```js
-dev.test(..., dev.end);
-```
 ### dev.watch(...) → everything but test
 ```js
 dev.watch(...);
 ```
+
+<br><br><br>
+## <a name ="export"></a>Exporting Test Scripts:
+### dev.test(...) → used to generate Tape Test files (and in the future, possibly code coverage)
+#### dev.end → property used by dev.test(...)
+
+for multiple test cases for one objectToTest
+```js
+dev.test(objToTest, [{},{},{}], dev.end);
+```
+or for only one test case for one objectToTest
+```js
+dev.test(objToTest, {}, dev.end);
+```
+dev.test currently only supports these tape assertions: 
+<br>[equal, notEqual, deepEqual, notDeepEqual, deepLooseEqual, notDeepLooseEqual, ok, notOk, error, comment]
+```js 
+function addTwo(num){
+    return num + 2; 
+}
+```
+
+#### Assertion types: equal, notEqual, deepEqual, notDeepEqual, deepLooseEqual, notDeepLooseEqual 
+```js
+dev.test(addTwo, 
+    {
+        input: 2,
+        type: 'equal', // assertion type
+        expected: 4,
+        msg: [optional]
+    }, 
+    dev.end
+);
+```
+
+#### Assertion types: ok, notOk
+```js
+dev.test(addTwo, 
+    {
+        input: 2,
+        type: 'ok',
+        msg: [optional]
+    },
+    dev.end
+);
+```
+#### Assertion type: error
+Assert that e is <i>falsy</i>. If e is <i>non-falsy</i>, use its err.message as the description message.
+```js
+dev.test(addTwo,
+    {
+        type: 'error',
+        e: 3,
+        msg: 'uh oh'
+    }, 
+    dev.end
+);
+```
+
+#### Assertion type: comment
+Print a message without breaking the tap output. (Useful when using e.g. tap-colorize where output is buffered & console.log will print in incorrect order vis-a-vis tap output.)
+```js
+dev.test(addTwo,
+    {
+        type: 'comment',
+        msg: 'Just leaving a comment here'
+    }, 
+    dev.end
+);
+```
+
+#### Using multiple test cases with different assertion types on one objectToTest:
+```js
+dev.test(addTwo, 
+    [
+        {
+            input: 2,
+            type: 'equal',
+            expected: 4,
+            msg: 'should equal to 4'
+        }, 
+        {
+            input: 2,
+            type: 'notEqual',
+            expected: 100,
+            msg: 'should not equal to 100!'
+        }, 
+        {
+            type: 'error',
+            e: 3,
+            msg: 'uh oh'
+        }, 
+        {
+            input: 2,
+            type: 'notOk',
+        }
+    ],
+    dev.end
+);
+```
+output: 
+```js
+    test('TESTING addTwo', (t) => {
+        t.equal(addTwo(2), 4, 'should equal to 4');
+        t.notEqual(addTwo(2), 100, 'should not equal to 100!');
+        t.error(addTwo(3), 'uh oh');
+        t.notOk(addTwo(2));
+    })
+```
+
+<br><br>
+
+
 ### dev.all(...) → "full-monty" dev function, same as calling [log && track &&|| test]
 ```js
-// ... === <exp||clcsv>, testObj, priority = 0, scope
-dev.watch(..., dev.end);
+// ... === <exp||clcsv>, objToTest, testCases, priority = 0, scope
+dev.all(..., dev.end);
 ```
-## dev Utils
+
+
+<br><br><br><br>
+
+## <a name="utils"></a> dev Utils
 ### dev.JSs(...) → JSON.stringify(...)
 ```js
 dev.JSs(...);
@@ -166,13 +280,20 @@ dev.JSp(...);
 dev.vw(...);
 ```
 
+
+<br>
+
 ## <a name="authors"></a>Authors
 * [**Ben**](https://github.com/benizra2)
 * [**George**](https://github.com/PracticalCode)
 * [**Jacqueline**](https://github.com/jqw-chang)
 
+<br>
+
 ## <a name="contributing"></a> Contributing
-#### If you would like to contribute, submit a pull request and update the README.md with details of changes.
+If you would like to contribute, submit a pull request and update the README.md with details of changes.
+
+<br>
 
 ## <a name="license"></a>License
 <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
