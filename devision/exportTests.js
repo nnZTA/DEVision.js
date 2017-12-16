@@ -31,11 +31,11 @@ async function traverseDir() {
         if (fileContent.indexOf('.test(') !== -1 || fileContent.indexOf('.all(') !== -1) {  
           fileContent = commentsBeGone(fileContent);
           
-          if (fileContent.indexOf("require('devision.js')".toLowerCase()) !== -1) {
+          if (fileContent.indexOf("require('DEVision.js')") !== -1) {
             let exporting = await exportTestCases(file, fileContent);
-          } else if (fileContent.indexOf('require("devision.js")') !== -1) {
+          } else if (fileContent.indexOf('require("DEVision.js")') !== -1) {
             let exporting = await exportTestCases(file, fileContent);
-          } else if (fileContent.indexOf('require(`devision.js`)') !== -1) {
+          } else if (fileContent.indexOf('require(`DEVision.js`)') !== -1) {
             let exporting = await exportTestCases(file, fileContent);
           } 
         }
@@ -57,12 +57,12 @@ function exportTestCases(srcFile, fileContent) {
   let declaration; // if `const ${declaration} = require('DEVision.js');`
   let requirement; // purpose: to keep track of '/"/`
 
-  if (fileContent.indexOf("require('devision.js')") !== -1) {
-    requirement = "require('devision.js')";
-  } else if (fileContent.indexOf('require("devision.js")') !== -1) {
-    requirement = 'require("devision.js")';
-  } else if (fileContent.indexOf('require(`devision.js`)') !== -1) {
-    requirement = 'require(`devision.js`)';
+  if (fileContent.indexOf("require('DEVision.js')") !== -1) {
+    requirement = "require('DEVision.js')";
+  } else if (fileContent.indexOf('require("DEVision.js")') !== -1) {
+    requirement = 'require("DEVision.js")';
+  } else if (fileContent.indexOf('require(`DEVision.js`)') !== -1) {
+    requirement = 'require(`DEVision.js`)';
   }
 
   let idx = fileContent.indexOf(requirement);
@@ -209,7 +209,7 @@ async function getGitIgnore(fileName) { // To access .gitIgnore file to grab fil
     ignoreMap.set('.vscode');
     ignoreMap.set('webpack.config.js');
     ignoreMap.set('DEV_Tests');
-    ignoreMap.set('nncl');
+    ignoreMap.set('devision');
     ignoreMap.set('README.md');
 
     let data = await getFileContent('.gitignore');

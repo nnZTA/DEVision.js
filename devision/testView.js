@@ -5,17 +5,17 @@ let active; //to be used on openTab(evt, tab) and on context of verticalScroll(x
 // let a = 1; //temporary to name newly created tabs;
 let formDiv = false;
 
-/**********START OF LOGIC IN CREATING, TABS, TABLES and CHANGING nnCL Data ******************/
+/**********START OF LOGIC IN CREATING, TABS, TABLES and CHANGING dev Data ******************/
 
 //invoked when adding a Scope or Track from Config Tab
 function openTab(evt, tab) { 
-  // nnCL.peek({evt});
+  // dev.peek({evt});
   // console.log("evt.currentTarget.id === ", evt.currentTarget.id.replace("Tab", ""));
   console.log("IN [testView.js] >>> function openTab(evt, tab)");
-  nnCL.viewerTabCurrent = evt.currentTarget.id.replace("Tab", "");
+  dev.viewerTabCurrent = evt.currentTarget.id.replace("Tab", "");
   console.log("evt.currentTarget.class === ", typeof evt.currentTarget);
   console.log("evt.currentTarget.class === ", evt.currentTarget.className);
-  nnCL.viewerTabCurrentType = (evt.currentTarget.className.indexOf('addTabFormClass') > -1) ? 'scope' : 'tracked';
+  dev.viewerTabCurrentType = (evt.currentTarget.className.indexOf('addTabFormClass') > -1) ? 'scope' : 'tracked';
 
   // Declare all letiables
   let i, tabcontent, tablinks;
@@ -60,61 +60,61 @@ function openTab(evt, tab) {
 }
 
 function tabPause() {
-  console.log(nnCL.viewerTabCurrentType , nnCL.viewerTabCurrent);
-  if (nnCL.scopeViews.get(nnCL.viewerTabCurrent)) {
-    if (nnCL.viewerTabCurrentType === 'scope') {
-      nnCL.scopeViews.get(nnCL.viewerTabCurrent).autoRefresh = false;
+  console.log(dev.viewerTabCurrentType , dev.viewerTabCurrent);
+  if (dev.scopeViews.get(dev.viewerTabCurrent)) {
+    if (dev.viewerTabCurrentType === 'scope') {
+      dev.scopeViews.get(dev.viewerTabCurrent).autoRefresh = false;
     }
     else {
       //tracked item
-      nnCL.trackedObjects.get(nnCL.viewerTabCurrent).autoRefresh = false;
+      dev.trackedObjects.get(dev.viewerTabCurrent).autoRefresh = false;
     }
   }
 }
 
 function tabPlay() {
-  if (nnCL.scopeViews.get(nnCL.viewerTabCurrent)) {    
-    if (nnCL.viewerTabCurrentType === 'scope') {
-      nnCL.scopeViews.get(nnCL.viewerTabCurrent).autoRefresh = true;
+  if (dev.scopeViews.get(dev.viewerTabCurrent)) {    
+    if (dev.viewerTabCurrentType === 'scope') {
+      dev.scopeViews.get(dev.viewerTabCurrent).autoRefresh = true;
 
 
 
-      if (document.getElementById(nnCL.viewerTabCurrent + 'Tab')) {
-        if (nnCL.viewerTabCurrent === "Console") {
-          for (let node = nnCL.consoleData.head; node; node = node.next) {                        // vwData.forEach( (value, key, map, scope) => {
+      if (document.getElementById(dev.viewerTabCurrent + 'Tab')) {
+        if (dev.viewerTabCurrent === "Console") {
+          for (let node = dev.consoleData.head; node; node = node.next) {                        // vwData.forEach( (value, key, map, scope) => {
             appendMapElements(node.data, node.ts, 'Tab1', 'Console', node.idx);
           };
         }
         else {
-          let watchDump = nnCL.watchDump(nnCL.viewerTabCurrent);
-          console.log(" tabPlay >>> nnCL.watchDump('", nnCL.viewerTabCurrent, "') ===");
+          let watchDump = dev.watchDump(dev.viewerTabCurrent);
+          console.log(" tabPlay >>> dev.watchDump('", dev.viewerTabCurrent, "') ===");
           console.log(watchDump);
 
 
 
           // todo todo todo ...  I don't understand why I don't need the following...
 
-          // if (document.getElementById(nnCL.viewerTabCurrent+'tbody')) {
-          //   document.getElementById(nnCL.viewerTabCurrent+'tbody').parentNode.removeChild(  document.getElementById(nnCL.viewerTabCurrent+'tbody')  );
+          // if (document.getElementById(dev.viewerTabCurrent+'tbody')) {
+          //   document.getElementById(dev.viewerTabCurrent+'tbody').parentNode.removeChild(  document.getElementById(dev.viewerTabCurrent+'tbody')  );
           // }
           
           // ... except that there's magic in the world?  (... or it's BenJaMin's fault ...)
 
 
     
-          // nnCL.scopeViewer(nnCL.viewerTabCurrent, nnCL.viewerTabCurrent + 'Tab');
-          // console.log("nnCL.scopeViews => ", nnCL.scopeViews); 
+          // dev.scopeViewer(dev.viewerTabCurrent, dev.viewerTabCurrent + 'Tab');
+          // console.log("dev.scopeViews => ", dev.scopeViews); 
     
           // console.log("newTabID === ", newTabID);
           watchDump.forEach( function (value, key, map) {
-            appendMapElements(value.logData, key, nnCL.viewerTabCurrent + 'Tab', nnCL.viewerTabCurrent, value.scopeIDX);
+            appendMapElements(value.logData, key, dev.viewerTabCurrent + 'Tab', dev.viewerTabCurrent, value.scopeIDX);
           });  
         }
       }  
     }
     else {
       //tracked item
-      nnCL.trackedObjects.get(nnCL.viewerTabCurrent).autoRefresh = true;
+      dev.trackedObjects.get(dev.viewerTabCurrent).autoRefresh = true;
     }
   }
 } 
@@ -164,12 +164,12 @@ function listTrackedObjs(origin, e) {
     
   }
 
-  let trackedObjsName = nnCL.trackedObjects.keys();
+  let trackedObjsName = dev.trackedObjects.keys();
   let trackedObjsArray = []; 
 
-  for(let i = 0; i < nnCL.trackedObjects.size; i += 1) {
+  for(let i = 0; i < dev.trackedObjects.size; i += 1) {
     let trackedObjName = trackedObjsName.next();
-    // console.log("this is each of the nnCL.watcher._catalog.keys();", trackedObjName);
+    // console.log("this is each of the dev.watcher._catalog.keys();", trackedObjName);
     if (trackedObjsArray.indexOf(trackedObjName) === -1) {
       trackedObjsArray.push(trackedObjName);
       // console.log('this is the #id trackedObjList', document.getElementById("trackedObjList"));
@@ -186,7 +186,7 @@ function listTrackedObjs(origin, e) {
 }
 
 //listScopes builds all the datalist options for forms with id addTabForm and addRowForm;
-//data being inputed is from nnCL.watcher.catalog and nnCL.currentScope
+//data being inputed is from dev.watcher.catalog and dev.currentScope
 function listScopes(origin, e) {
   event.preventDefault();
 
@@ -196,12 +196,12 @@ function listScopes(origin, e) {
   dataList.setAttribute("id", "scopeList");
   textForm.appendChild(dataList);
 
-  let scopesSymbol = nnCL.watcher._catalog.keys();
+  let scopesSymbol = dev.watcher._catalog.keys();
   let scopesArray = []; 
 
-  for(let i = 0; i < nnCL.watcher._catalog.size; i += 1) {
+  for(let i = 0; i < dev.watcher._catalog.size; i += 1) {
     let scopeName = Symbol.keyFor(scopesSymbol.next().value);
-    // console.log("this is each of the nnCL.watcher._catalog.keys();", scopeName);
+    // console.log("this is each of the dev.watcher._catalog.keys();", scopeName);
     if (scopesArray.indexOf(scopeName) === -1) {
       scopesArray.push(scopeName);
       // console.log('this is the #id scopeList', document.getElementById("scopeList"));
@@ -217,8 +217,8 @@ function listScopes(origin, e) {
   // console.log('listScopes was triggered========THIS IS DATALIST.OPTIONS===========>', dataList.options);
   
   //Add another loop to add currentScopes
-  for (let k = 0; k < nnCL.currentScope.length; k++) {
-    let scopeName = nnCL.currentScope[k];
+  for (let k = 0; k < dev.currentScope.length; k++) {
+    let scopeName = dev.currentScope[k];
 
     if (scopesArray.indexOf(scopeName) === -1) {
       scopesArray.push(scopeName);
@@ -248,22 +248,22 @@ function listScopes(origin, e) {
 //Removes and addTablebuilds the Current Scopes Table found in Config Tab under Runtime Config.
 //Helper functions used are the ff: addScopeTable() appendScopeElements().
 function createConfigForm() {
-  document.getElementById("currentPriority").innerText = ` Current Priority: ${nnCL.currentPriority}`;
+  document.getElementById("currentPriority").innerText = ` Current Priority: ${dev.currentPriority}`;
   
-  // console.log('========>', nnCL.currentScope);
-  // console.log('=========BEFORE==============>', nnCL.currentScope);
+  // console.log('========>', dev.currentScope);
+  // console.log('=========BEFORE==============>', dev.currentScope);
   if (document.getElementById('scopeListTable')) {
     while (document.getElementById('scopeTableBody').firstChild) {
       document.getElementById('scopeTableBody').removeChild(document.getElementById('scopeTableBody').firstChild);
     }
   }
-    // console.log('=========AFTER==============>', nnCL.currentScope);
-  nnCL.currentScope.forEach(appendScopeElements);
-  // console.log('========>', nnCL.currentScope);
+    // console.log('=========AFTER==============>', dev.currentScope);
+  dev.currentScope.forEach(appendScopeElements);
+  // console.log('========>', dev.currentScope);
 }
 
 
-//Changes value of nnCL.currentPriority directly. Triggered in form id="changePriorityForm"
+//Changes value of dev.currentPriority directly. Triggered in form id="changePriorityForm"
 function changePriority(e) {
   event.preventDefault();
   let priority = document.getElementById("textFormPriority").value;
@@ -271,9 +271,9 @@ function changePriority(e) {
 
   if (!isNaN(priority)) { //inputted data is a number
 
-    // console.log('this is the nnCL.currentPriority BEFORE=========>', nnCL.currentPriority);    
-    nnCL.currentPriority = Number(priority);
-    document.getElementById("currentPriority").innerText = ` Current Priority: ${nnCL.currentPriority}`;
+    // console.log('this is the dev.currentPriority BEFORE=========>', dev.currentPriority);    
+    dev.currentPriority = Number(priority);
+    document.getElementById("currentPriority").innerText = ` Current Priority: ${dev.currentPriority}`;
   } else {
     document.getElementById("statChangePriority").innerText = "***Please enter a number"
   }
@@ -324,8 +324,8 @@ function newScopeTab(e) {
       document.getElementById('addTabStatus').innerText = "";
       if (!document.getElementById(showScope + 'Tab')) {
         newTabID = newTab(showScope, madeFrom);
-        nnCL.scopeViewer(showScope, newTabID);
-        console.log("nnCL.scopeViews => ", nnCL.scopeViews); 
+        dev.scopeViewer(showScope, newTabID);
+        console.log("dev.scopeViews => ", dev.scopeViews); 
         // openTab(event, newTabID);
         document.getElementById(showScope + "Tab").click();
         return;
@@ -341,13 +341,13 @@ function newScopeTab(e) {
       document.getElementById("addTabStatus").innerText = `***Tab '${showScope}' already exists.`;
     }
     
-    let watchDump = nnCL.watchDump(showScope);
-    console.log(" >>> nnCL.watchDump('", showScope, "') ===");
+    let watchDump = dev.watchDump(showScope);
+    console.log(" >>> dev.watchDump('", showScope, "') ===");
     console.log(watchDump);
     if (!document.getElementById(showScope+'table')) {
       newTabID = newTab(showScope, madeFrom);
-      nnCL.scopeViewer(showScope, newTabID);
-      console.log("nnCL.scopeViews => ", nnCL.scopeViews); 
+      dev.scopeViewer(showScope, newTabID);
+      console.log("dev.scopeViews => ", dev.scopeViews); 
     // console.log("newTabID === ", newTabID);
       let rowCount = 0;
       if (watchDump) {
@@ -373,8 +373,8 @@ function newScopeTab(e) {
       document.getElementById("addTabStatus").innerText = "";
       if (!document.getElementById(showScope + 'Tab')) {
         newTabID = newTab(showScope, madeFrom);
-        nnCL.trackViewer(showScope, newTabID);
-        console.log("nnCL.trackedObjects => ", nnCL.trackedObjects);      
+        dev.trackViewer(showScope, newTabID);
+        console.log("dev.trackedObjects => ", dev.trackedObjects);      
         // openTab(event, newTabID);
         document.getElementById(showScope + "Tab").click();
         return;
@@ -402,19 +402,19 @@ function newTab(scope, madeFrom) {
   }
 
   let button = document.createElement("div");      
-  let buttonNode = document.createTextNode(  (scope) ? scope : `Tab${nnCL.viewerTabCount}` );
+  let buttonNode = document.createTextNode(  (scope) ? scope : `Tab${dev.viewerTabCount}` );
 
   button.appendChild(buttonNode);
-  button.setAttribute("id", (scope) ? scope + 'Tab' : `Tab${nnCL.viewerTabCount}`);
+  button.setAttribute("id", (scope) ? scope + 'Tab' : `Tab${dev.viewerTabCount}`);
   button.classList.add("tablinks");
   button.className += ` button ${className}`;  
-  button.setAttribute("onclick",`openTab(event, 'Tab${nnCL.viewerTabCount}')`);
+  button.setAttribute("onclick",`openTab(event, 'Tab${dev.viewerTabCount}')`);
 
   if (scope !== 'Console') {
     let closeButton = document.createElement("BUTTON");
-    closeButton.setAttribute("id", `navTab${nnCL.viewerTabCount}`);
+    closeButton.setAttribute("id", `navTab${dev.viewerTabCount}`);
     closeButton.classList.add("closeNavButton");
-    closeButton.setAttribute("onclick", `closeNavTab(this, 'navTab${nnCL.viewerTabCount}', 'Tab${nnCL.viewerTabCount}')`);
+    closeButton.setAttribute("onclick", `closeNavTab(this, 'navTab${dev.viewerTabCount}', 'Tab${dev.viewerTabCount}')`);
     closeButton.innerHTML = 'x';
 
     button.appendChild(closeButton);
@@ -422,17 +422,17 @@ function newTab(scope, madeFrom) {
   document.getElementById("tabRibbon").appendChild(button);
 
   let newHeader = document.createElement('h3');
-  let innerText = document.createTextNode((scope) ? scope + ` (Tab${nnCL.viewerTabCount})` : `Tab${nnCL.viewerTabCount}`);
+  let innerText = document.createTextNode((scope) ? scope + ` (Tab${dev.viewerTabCount})` : `Tab${dev.viewerTabCount}`);
   newHeader.appendChild(innerText);
 
   let newDiv = document.createElement('div');
-  newDiv.id = `Tab${nnCL.viewerTabCount}`;
+  newDiv.id = `Tab${dev.viewerTabCount}`;
   newDiv.className = 'tabcontent';
   newDiv.appendChild(newHeader);
 
   document.getElementById("innerPage").appendChild(newDiv);
 
-  nnCL.viewerTabCount += 1;
+  dev.viewerTabCount += 1;
   //console.log('in index.js ---- newTab() invoked');
   if (madeFrom === "addTrackForm") {
     console.log("########  [testView.js] appendMapElementsappendMapElementsappendMapElements >>>");
@@ -453,28 +453,28 @@ function closeNavTab(e, id, tabPageId) {
   console.log("currentName === ", currentName);
   if (e.parentNode.classList.contains('addTrackFormClass'))
   {
-    console.log("nnCL.trackedObjects => ", nnCL.trackedObjects);
-    let trackedObject = nnCL.trackedObjects.get(currentName);
+    console.log("dev.trackedObjects => ", dev.trackedObjects);
+    let trackedObject = dev.trackedObjects.get(currentName);
     console.log("trackedObject === ", trackedObject);
     if (trackedObject.Obj) {
       trackedObject.viewName = undefined;
     } 
     else {
-      nnCL.trackedObjects.delete(currentName);
+      dev.trackedObjects.delete(currentName);
     }
-    console.log("nnCL.trackedObjects => ", nnCL.trackedObjects);
+    console.log("dev.trackedObjects => ", dev.trackedObjects);
   }
   else { 
-    console.log("nnCL.scopeViews => ", nnCL.scopeViews);
-    let scopeView = nnCL.scopeViews.get(currentName);
+    console.log("dev.scopeViews => ", dev.scopeViews);
+    let scopeView = dev.scopeViews.get(currentName);
     console.log("scopeView === ", scopeView);
     if (scopeView.Obj) {
       scopeView.viewName = undefined;
     } 
     else {
-      nnCL.scopeViews.delete(currentName);
+      dev.scopeViews.delete(currentName);
     }
-    console.log("nnCL.scopeViews => ", nnCL.scopeViews);
+    console.log("dev.scopeViews => ", dev.scopeViews);
   }
 
   // console.log("this is the name of tracked object", e.parentNode.id.replace('Tab', ''));  
@@ -486,15 +486,15 @@ function closeNavTab(e, id, tabPageId) {
 }
 
 //deletes row on table #scopeListTable on Config Tab under 
-//Current Scopes and splices out data from nnCL.currentScope
+//Current Scopes and splices out data from dev.currentScope
 function removeRow(scope) { 
-  nnCL.currentScope.splice(nnCL.currentScope.indexOf(scope), 1);
+  dev.currentScope.splice(dev.currentScope.indexOf(scope), 1);
   createConfigForm(); //if table exists, deletes it, then builds it again
   listScopes();
 }
 
 //triggered by form id="addRowForm" that adds a row with the inputted string. 
-//Filters duplicates and pushes it in nnCL.currentScope
+//Filters duplicates and pushes it in dev.currentScope
 function addRow(e) { // "e" === this
   event.preventDefault();
   const scope = e.elements[0].value;
@@ -502,12 +502,12 @@ function addRow(e) { // "e" === this
   // console.log('========THIS IS THE SCOPES PARENT========>', scope);
 
   if (scope === '') return;
-  if (nnCL.currentScope.indexOf(scope) > -1) {
+  if (dev.currentScope.indexOf(scope) > -1) {
     document.getElementById("statusAddScope").innerText = "Entered scope already exists***"
     return;
   }
 
-  nnCL.currentScope.push(scope);
+  dev.currentScope.push(scope);
   listScopes();
   createConfigForm(); //if table exists, deletes it, then builds it again
   e.elements[0].value = "";
@@ -606,7 +606,7 @@ function appendMapElements(value, key, parentElement, scope = '', rowCount) {
 
   console.log("IN appendMapElements >>> scope === ", scope); 
 
-  // let poppedRow = nnCL.scopeViews.get(scope).viewRowManager.addLast(rowCount);
+  // let poppedRow = dev.scopeViews.get(scope).viewRowManager.addLast(rowCount);
   // if (poppedRow) {
   //   for (let node = poppedRow.head; node; node = node.next) {
   //     console.log("poppedRow >>>> 'viewDR_'+scope+node.idx === ", 'viewDR_'+scope+node.idx);
@@ -616,7 +616,7 @@ function appendMapElements(value, key, parentElement, scope = '', rowCount) {
   //   };
   // }
 
-  let scopeView = nnCL.scopeViews.get(scope);
+  let scopeView = dev.scopeViews.get(scope);
   if (scopeView) {
     let poppedRow = scopeView.viewRowManager.addLast(rowCount);
     if (poppedRow) {
@@ -637,8 +637,8 @@ function appendMapElements(value, key, parentElement, scope = '', rowCount) {
   let table = document.getElementById(scope+'tbody');
   let row = table.insertRow(table.rows.length);
   // row.setAttribute('id', 'viewDR_'+scope+rowCount);
-  // row.setAttribute('id', 'viewDR_' + scope + nnCL.scopeViews.get(scope).viewRowManager.tail.idx);
-  row.setAttribute('id', 'viewDR_' + scope + (  (scopeView) ? nnCL.scopeViews.get(scope).viewRowManager.tail.idx : 42  )  );
+  // row.setAttribute('id', 'viewDR_' + scope + dev.scopeViews.get(scope).viewRowManager.tail.idx);
+  row.setAttribute('id', 'viewDR_' + scope + (  (scopeView) ? dev.scopeViews.get(scope).viewRowManager.tail.idx : 42  )  );
   let cell0 = row.insertCell(0);
   let cell1 = row.insertCell(1);
   let cell2 = row.insertCell(2);
@@ -654,7 +654,7 @@ function appendMapElements(value, key, parentElement, scope = '', rowCount) {
 
 
 
-/***END*****END******END OF LOGIC IN CREATING, TABS, TABLES and CHANGING nnCL Data ************END********END**************/
+/***END*****END******END OF LOGIC IN CREATING, TABS, TABLES and CHANGING dev Data ************END********END**************/
 
 
 /****************** START OF LOGIC FOR MINIMIZING AND EXPANDING WINDOW*******************/
@@ -865,7 +865,7 @@ function prepViewer () {
  /******************************END FOR MANUAL RESIZING BY DRAGGING*************************/
 
  console.log("all this shite should run now...");
-//  nnCL.vw();
+//  dev.vw();
 
 }
 

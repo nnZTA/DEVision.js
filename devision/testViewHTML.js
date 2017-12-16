@@ -6,7 +6,7 @@ const templateViewer = `
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" type="text/css" href="../nncl/style.css">
+  <link rel="stylesheet" type="text/css" href="../devision/style.css">
   <title>View</title>
 </head>
 <body>
@@ -14,8 +14,8 @@ const templateViewer = `
   <div id="container">
     <div id="handle"></div>
     <div id="headerDiv">
-      <div id="miniDiv"><button class="miniButton" id="miniVWClose" onclick="nnCL.vwClose()">X</button></div>
-      <div id="miniDiv"><button class="miniButton" id="miniVWHide" onclick="nnCL.vwHide()">H</button></div>
+      <div id="miniDiv"><button class="miniButton" id="miniVWClose" onclick="dev.vwClose()">X</button></div>
+      <div id="miniDiv"><button class="miniButton" id="miniVWHide" onclick="dev.vwHide()">H</button></div>
       <div id="miniDiv"><button class="miniButton" id="miniButton" onclick="slideToggle()">-</button></div>
     <div id="containerheader">Click here to reposition</div>
     </div>

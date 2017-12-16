@@ -8,9 +8,18 @@ DEVision is intended as a drop-in replacement for console.log, with the followin
  - Elegant API
  - Browser/Platform Independent
  - *... did we mention, Fast?*
+
+
 # Table of contents
-[TOC]
-# DEVision.js Overview #
+- [Authors](#authors)
+- [Overview](#overview)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Documentations](#api)
+- [More](#contributing)
+
+
+# <a name="overview"></a>DEVision.js Overview #
 ## Problem ##
  - No run-time debug tracking in JavaScript that's browser and platform independent.
  - Currently all console.log messages will run into one another & overlap
@@ -22,12 +31,12 @@ DEVision is intended as a drop-in replacement for console.log, with the followin
  - An improved console.log replacement allowing the developer to decide (at run-time)* what will be logged based on both priority level & user-defined scope with the ability to track/snapshot variable values and test their values.
 
 
-# DEVision.js Setup #
-#### Usage in Node.js
+# <a name="setup"></a>DEVision.js Setup #
+#### Setup in Node.js
 ```js
 const dev = require(devision.js);
 ```
-#### Usage in Front-End
+#### Setup in Front-End
 ```html
 <head>
     <script src="../devision/linkedList.js"></script>
@@ -37,7 +46,7 @@ const dev = require(devision.js);
 </head>
 ```
 
-# DEVision.js HowTo #
+# <a name="Usage"></a>DEVision.js HowTo #
 ## Usage in General ☺
 In fullfilling DEVision's primary purpose of being a drop-in replacement for ```console.log``` it is easiest to think of it as a Log Butler that takes care of your diagnostic household.  As is the Butler, it will be the gatekeeper for access to your logs.  There are two primary methods (during runtime) which allow you to control your diagnostic data flow:
 ```
@@ -79,7 +88,7 @@ Database Connection Failure <*critical alert/error*>
 
 
 
-## DEVision.js API
+## <a name="api"></a>DEVision.js API
 ### dev.log(...) → drop-in replacement for console.log(...)
 ```js
 //  exp === ExpressionToBeLogged
@@ -157,10 +166,14 @@ dev.JSp(...);
 dev.vw(...);
 ```
 
-## Authors
-    [**Ben**](https://github.com/benizra2)
-    [**George**](https://github.com/PracticalCode)
-    [**Jacqueline**](https://github.com/jqw-chang)
+## <a name="authors"></a>Authors
+* [**Ben**](https://github.com/benizra2)
+* [**George**](https://github.com/PracticalCode)
+* [**Jacqueline**](https://github.com/jqw-chang)
 
-## License
-This project is licensed under the MIT License
+## <a name="contributing"></a> Contributing
+#### If you would like to contribute, submit a pull request and update the README.md with details of changes.
+
+## <a name="license"></a>License
+<center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</center>

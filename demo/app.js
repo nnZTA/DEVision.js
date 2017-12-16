@@ -1,4 +1,4 @@
-//  CS-Demo-nnCL-MapData
+//  CS-Demo-dev-MapData
 'use strict';
 
 
@@ -12,17 +12,17 @@
 'use strict';
 window.onload = () => {
 
-// nnCL.log(["app START", window.performance.now().toFixed(4)],0,'appRunTime');
-// nnCL.log(["IN CS-Demo-REST-StockMarket", window.performance.now().toFixed(4)],0,'global');
+// dev.log(["app START", window.performance.now().toFixed(4)],0,'appRunTime');
+// dev.log(["IN CS-Demo-REST-StockMarket", window.performance.now().toFixed(4)],0,'global');
 
-nnCL.log(["IN CS-Demo-REST-StockMarket && app START", window.performance.now().toFixed(4)],0,['global', 'appRunTime']);
+dev.log(["IN CS-Demo-REST-StockMarket && app START", window.performance.now().toFixed(4)],0,['global', 'appRunTime']);
 
 
 const stockURLprefix = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
 const stockURLsuffix = '&interval=1min&outputsize=compact&apikey=CVAEBYTRXE2YN90V';
 
 let tickerArray = ['AAPL', 'GOOG', 'MSFT', 'ORCL', ]
-// nnCL.log(["tickerArray[", tickerArray.length, "] === ", tickerArray]);
+// dev.log(["tickerArray[", tickerArray.length, "] === ", tickerArray]);
 let tickerData = new Map();
 
 function    httpGetAsync (theUrl, callback, ...cbArgs) {   // when the async operation is complete the callback function is executed with the async results passed into callback
@@ -41,9 +41,9 @@ function    httpGetAsync (theUrl, callback, ...cbArgs) {   // when the async ope
     
     
 function fnSaveStocks (responseText, ...cbArgs) {
-  nnCL.log(["IN fnSaveStocks (", cbArgs[0], ")"],0,'dataIO');
-  nnCL.log(["IN fnSaveStocks @ ", window.performance.now().toFixed(4)],0,'global');
-  nnCL.log(["cbArgs[0] === ", cbArgs[0]]);
+  dev.log(["IN fnSaveStocks (", cbArgs[0], ")"],0,'dataIO');
+  dev.log(["IN fnSaveStocks @ ", window.performance.now().toFixed(4)],0,'global');
+  dev.log(["cbArgs[0] === ", cbArgs[0]]);
   
   let responseObj = JSON.parse(responseText);
   let truncatedObj = {};
@@ -51,44 +51,44 @@ function fnSaveStocks (responseText, ...cbArgs) {
   let timeDataObj = Object.assign({}, responseObj['Time Series (1min)']);
   truncatedObj['Time Series (1min)'] = {};
   for (let i = 0; i < 3; i += 1){
-    // nnCL.log(["truncatedObj >>> i === ", i]);
+    // dev.log(["truncatedObj >>> i === ", i]);
 
     truncatedObj['Time Series (1min)'][Object.keys(timeDataObj)[i]] = 
     Object.assign({}, timeDataObj[ Object.keys(timeDataObj)[i] ]);
 
-    // nnCL.log(["truncatedObj['Time Series (1min)'] === ", truncatedObj['Time Series (1min)']]);
+    // dev.log(["truncatedObj['Time Series (1min)'] === ", truncatedObj['Time Series (1min)']]);
   }
     
   // tickerData.set(cbArgs[0], JSON.parse(responseText));
   tickerData.set(cbArgs[0], truncatedObj);
-  nnCL.log(["tickerData.get(cbArgs[0]) === ", tickerData.get(cbArgs[0])]);
+  dev.log(["tickerData.get(cbArgs[0]) === ", tickerData.get(cbArgs[0])]);
 }    
     
 function fnGetStocks () {
-  nnCL.log(["IN fnGetStocks @ ", window.performance.now().toFixed(4)],0,'global');
+  dev.log(["IN fnGetStocks @ ", window.performance.now().toFixed(4)],0,'global');
   for (let i = 0; i < tickerArray.length-0; i += 1) {
     let stockURL = stockURLprefix + tickerArray[i] + stockURLsuffix;
-    nnCL.log(["httpGetAsync for tickerArray[", i, "] === ", tickerArray[i]]);
-    nnCL.log(["stockURL[", stockURL.length, "] === ", stockURL]);
+    dev.log(["httpGetAsync for tickerArray[", i, "] === ", tickerArray[i]]);
+    dev.log(["stockURL[", stockURL.length, "] === ", stockURL]);
     httpGetAsync (stockURL, fnSaveStocks, tickerArray[i])
   }
 }
 
 function fnPingStocks (interval) {
-  nnCL.log(["IN fnPingStocks", window.performance.now().toFixed(4)],0,'global');
+  dev.log(["IN fnPingStocks", window.performance.now().toFixed(4)],0,'global');
   return setInterval( () => {
-    nnCL.log("_______________________________________________________________");
-    nnCL.log(["IN fnPingStocks >>> setInterval", window.performance.now().toFixed(4)]);
-    nnCL.log(["stockIntervalCount === " + stockIntervalCount]);
+    dev.log("_______________________________________________________________");
+    dev.log(["IN fnPingStocks >>> setInterval", window.performance.now().toFixed(4)]);
+    dev.log(["stockIntervalCount === " + stockIntervalCount]);
     fnGetStocks ();
     stockIntervalCount += 1;
-    nnCL.log(["stockIntervalCount === ", stockIntervalCount]);
+    dev.log(["stockIntervalCount === ", stockIntervalCount]);
     if (stockIntervalCount > stockIntervalMax) {
-      nnCL.log("IN if (stockIntervalCount >= stockIntervalMax - 1)");
+      dev.log("IN if (stockIntervalCount >= stockIntervalMax - 1)");
       clearInterval(stockInterval);
-      // nnCL.log(["app END", window.performance.now().toFixed(4)],0,'appRunTime');
-      // nnCL.log(["app END", window.performance.now().toFixed(4)],0,'newEndScope');
-      nnCL.log(["IN CS-Demo-REST-StockMarket && app END", window.performance.now().toFixed(4)],0,['global', 'appRunTime', 'newEndScope' ]);
+      // dev.log(["app END", window.performance.now().toFixed(4)],0,'appRunTime');
+      // dev.log(["app END", window.performance.now().toFixed(4)],0,'newEndScope');
+      dev.log(["IN CS-Demo-REST-StockMarket && app END", window.performance.now().toFixed(4)],0,['global', 'appRunTime', 'newEndScope' ]);
       
     }
   }, interval);
@@ -112,7 +112,7 @@ function updateViewer() {
   console.log(["IN setTimeout", window.performance.now().toFixed(4)]);
   console.log("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV _______________________________");
   console.log("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV _______________________________");
-  let vwData = nnCL.consoleData;
+  let vwData = dev.consoleData;
 
   console.log("vwData ===", vwData);     //   vwData is a Map object, where the 'key' is the timestamp, and the 'value' is the logged string
   
@@ -143,41 +143,41 @@ let stockIntervalMax   = 1;
 let testDelay = 21; // in seconds
 let stockInterval = fnPingStocks (testDelay*1000); // one minute
 setTimeout( () => {
-  nnCL.log(["IN setTimeout", window.performance.now()],0,'global');
-  nnCL.log("_______________________________________________________________");
-  nnCL.log("_______________________________________________________________");
-  nnCL.log("_______________________________________________________________");
-  nnCL.log("tickerData ===");
-  nnCL.log([tickerData]);
+  dev.log(["IN setTimeout", window.performance.now()],0,'global');
+  dev.log("_______________________________________________________________");
+  dev.log("_______________________________________________________________");
+  dev.log("_______________________________________________________________");
+  dev.log("tickerData ===");
+  dev.log([tickerData]);
 
-  // nnCL.log("__________ to JSON >>> >>> >>>");
-  // nnCL.log([JSON.stringify(tickerData)]);
+  // dev.log("__________ to JSON >>> >>> >>>");
+  // dev.log([JSON.stringify(tickerData)]);
   //  NOTE ~~ JSON.stringify(tickerData) ~~ does not work on Map Objects
-  nnCL.log("__________ to JSON >>> >>> >>>");
-  nnCL.log(mapToJson(tickerData));
-  nnCL.log("__________ back to Map >>> >>> >>>");
-  nnCL.log(jsonToMap(mapToJson(tickerData)));
+  dev.log("__________ to JSON >>> >>> >>>");
+  dev.log(mapToJson(tickerData));
+  dev.log("__________ back to Map >>> >>> >>>");
+  dev.log(jsonToMap(mapToJson(tickerData)));
 
   
-  nnCL.log("_______________________________ |||||||||||||||||||||||||||||||");
-  nnCL.log("_______________________________ |||||||||||||||||||||||||||||||");
-  nnCL.log("_______________________________ |||||||||||||||||||||||||||||||");
+  dev.log("_______________________________ |||||||||||||||||||||||||||||||");
+  dev.log("_______________________________ |||||||||||||||||||||||||||||||");
+  dev.log("_______________________________ |||||||||||||||||||||||||||||||");
   
-  // console.log("mapToJson(nnCL.consoleData._storage) ===");
-  // console.log(mapToJson(nnCL.consoleData._storage));
+  // console.log("mapToJson(dev.consoleData._storage) ===");
+  // console.log(mapToJson(dev.consoleData._storage));
 
   console.log("_______________________________ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-  console.log("nnCL.consoleData ===");
-  console.log(nnCL.consoleData);
+  console.log("dev.consoleData ===");
+  console.log(dev.consoleData);
 
   
   //BenNote ~ START ~ This code needs moved to the [addTab] button form
   console.log("_______________________________ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-  console.log("nnCL.watcher._catalog['", nnCL.watcher._catalog.size, "'] ===", nnCL.watcher._catalog);
+  console.log("dev.watcher._catalog['", dev.watcher._catalog.size, "'] ===", dev.watcher._catalog);
   
-    let scopesSymbol = nnCL.watcher._catalog.keys();
+    let scopesSymbol = dev.watcher._catalog.keys();
   let scopesArray = [];
-  for(let i = 0; i < nnCL.watcher._catalog.size; i += 1) {
+  for(let i = 0; i < dev.watcher._catalog.size; i += 1) {
       scopesArray.push(Symbol.keyFor(scopesSymbol.next().value));
   }
 
@@ -188,8 +188,8 @@ setTimeout( () => {
   //Ben SubNote ~ you will only need the first of the following three code blocks...
   // console.log("_______________________________ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
   // let showScope = 'appRunTime'; // 'appRunTime' should come from a webForm or CLI
-  // console.log("nnCL.watchDump('", showScope, "') ===");
-  // let watchDump = nnCL.watchDump(showScope);
+  // console.log("dev.watchDump('", showScope, "') ===");
+  // let watchDump = dev.watchDump(showScope);
   // console.log(watchDump);
   // let newTabID = newTab(showScope);
   // console.log("newTabID === ", newTabID);
@@ -200,8 +200,8 @@ setTimeout( () => {
   //BenNote ~ END
 
   // console.log("_______________________________ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-  // console.log("nnCL.watcher ===");
-  // console.log(nnCL.watcher);
+  // console.log("dev.watcher ===");
+  // console.log(dev.watcher);
   console.log("_______________________________ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
   console.log("_______________________________ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
   console.log("_______________________________ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
@@ -212,7 +212,7 @@ setTimeout( () => {
 
     
     setInterval(()=>{
-        nnCL.log("IN [app.js] TEST Live IMPORTANT ... window.performance.now() === " + window.performance.now().toFixed(4), 2, 'bar');
+        dev.log("IN [app.js] TEST Live IMPORTANT ... window.performance.now() === " + window.performance.now().toFixed(4), 2, 'bar');
     }, 2000);
 
 }, (stockIntervalMax + 0.5) * testDelay * 2000);
@@ -220,7 +220,7 @@ setTimeout( () => {
 
 
 setInterval(()=>{
-  nnCL.log("IN [app.js] TEST Live Log ... window.performance.now() === " + window.performance.now().toFixed(4), 0, 'foo');
+  dev.log("IN [app.js] TEST Live Log ... window.performance.now() === " + window.performance.now().toFixed(4), 0, 'foo');
 }, 2000);
 
 

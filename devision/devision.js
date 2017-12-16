@@ -1,5 +1,164 @@
-//  nnCL NinjaNineConsoleLog
+//  dev NinjaNineConsoleLog
 'use strict';
+
+
+/****************** HELPER FUNCTION ******************/
+
+
+Array.prototype.arrayHasIntersection = function (compareToArr) {  
+  for (let i = 0; i < compareToArr.length; i += 1) {
+    for (let j = 0; j < this.length; j += 1) {
+      if (compareToArr[i] === this[j]) return true;
+    }
+  }
+  return false;
+}
+
+
+/*****************************************************/
+/****************** DATA STRUCTURES ******************/
+/******************                 ******************/
+
+/***************** DOUBLE LINKED LIST *****************/
+
+class DLLNode {
+  constructor (data, idx) {
+    this.idx = idx;
+    this.data = data;
+    this.ts = window.performance.now().toFixed(4);
+    this.next = null;
+    this.prev = null;
+  }
+}
+
+class DoubleLinkedList {
+  constructor(maxCountDesired = -1) {
+    this.maxCountDesired = maxCountDesired;
+    this.head = null;
+    this.tail = null;
+    this.count = 0;
+  }
+  
+  get length() {
+    return this.count;
+  }
+  
+  addLast(data, idx = -1) {
+    // Create a new Node
+    const node = new DLLNode (data);
+    
+    if(this.count === 0) {
+      // If this is the first Node, assign it to head
+      node.idx = (idx === -1) ? 0 : idx;
+      this.head = node;
+    } else {
+      // If not the first node, link it to the last node
+      node.idx = (idx === -1) ? this.tail.idx + 1 : idx;
+      node.prev = this.tail;
+      this.tail.next = node;
+    }
+    
+    this.tail = node;
+    
+    this.count += 1;
+    let returnDLL;
+    // console.log("this.count === ", this.count);
+    // console.log("this.maxCountDesired === ", this.maxCountDesired);
+    if(this.maxCountDesired > -1 && this.count > this.maxCountDesired) {
+      // console.log("this.maxCountDesired exceeded by ", this.count - this.maxCountDesired)
+      returnDLL = new DoubleLinkedList();
+      returnDLL = this.removeFirst(this);
+    }
+    return returnDLL;
+  }
+  
+  addFirst(data, idx = -1) {
+    // Create a new Node
+    const node = new DLLNode (data);
+    
+    // Save the first Node
+    // const temp = this.head;
+    node.next = this.head;
+    
+    // Point head to the new Node
+    this.head = node;
+    
+    // Add the rest of node behind the new first Node
+    // this.head.next = temp;
+    
+    this.count += 1;
+    
+    if(this.count === 1) {
+      // If first node, 
+      // point tail to it as well
+      this.head.idx = (idx === -1) ? 0 : idx;
+      this.tail = this.head;
+    }
+    else {
+      node.next.prev = node;
+      this.head.idx = (idx === -1) ? this.tail.idx + 1 : idx;
+    }
+    
+    let returnDLL;
+    // console.log("this.count === ", this.count);
+    // console.log("this.maxCountDesired === ", this.maxCountDesired);
+    if(this.maxCountDesired > -1 && this.count > this.maxCountDesired) {
+      // console.log("this.maxCountDesired exceeded by ", this.count - this.maxCountDesired)
+      returnDLL = new DoubleLinkedList();
+      returnDLL.addLast = this.removeFirst(this);
+    }
+    return returnDLL;
+  } 
+  
+  removeFirst() {
+    let returnNode;
+    if(this.count > 0) {
+      returnNode = new DoubleLinkedList();
+      returnNode.addLast(this.head.data, this.head.idx);
+      // The head should point to the second element
+      this.head = this.head.next;
+      this.head.prev = null;
+      
+      this.count -= 1;
+      
+      if(this.count === 0) {
+        // If list empty, set tail to null
+        this.tail = null;  
+      } 
+    }
+    return returnNode;
+  }
+  
+  removeLast() {
+    let returnNode;
+    if(this.count > 0) {
+      returnNode = new DoubleLinkedList();
+      returnNode.addLast(this.tail.data, this.tail.idx);
+      if(this.count === 1) {
+        this.head = null;
+        this.tail = null;
+      } else {
+        // Find the Node right before the last Node
+        let current = this.head;
+        while(current.next !== this.tail) {
+          current = current.next;
+        }
+        
+        current.next = null;
+        this.tail = current;
+      }
+      this.count -= 1;
+    }
+    return returnNode;
+  }
+}
+
+
+if (typeof window === 'undefined' && typeof process !== 'undefined') {
+  // check to see if this is a node environment, since there is no DoubleLinkedList 
+  module.exports = DoubleLinkedList;
+}
+
 
 let _DoubleLinkedList;
 
@@ -10,15 +169,9 @@ if (typeof window === 'undefined' && typeof process !== 'undefined') {
 else {
   _DoubleLinkedList = DoubleLinkedList;
 }
+///////////////////////////////////////////////////////////////////////////////
 
-Array.prototype.arrayHasIntersection = function (compareToArr) {  
-  for (let i = 0; i < compareToArr.length; i += 1) {
-    for (let j = 0; j < this.length; j += 1) {
-      if (compareToArr[i] === this[j]) return true;
-    }
-  }
-  return false;
-}
+/*****************    MAP QUEUE    *****************/
 
 class MapQueueSymbol {
   constructor (maxCountDesired = -1) {
@@ -38,11 +191,11 @@ class MapQueueSymbol {
     }
     dataQueue.symbolData.addLast(dataSymbol);
     // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> scope appendMapElements", typeof appendMapElements);  
-    if (nnCL.viewerActive && typeof appendMapElements !== 'undefined' && nnCL.scopeViews.get(scope) && ( (nnCL.scopeViews.get(nnCL.viewerTabCurrent)) ? nnCL.scopeViews.get(nnCL.viewerTabCurrent).autoRefresh : true)) {
-      console.log(data, Symbol.keyFor(dataSymbol), nnCL.scopeViews.get(scope).viewName, scope, dataQueue.symbolData.tail.idx);
-      appendMapElements(data, Symbol.keyFor(dataSymbol), nnCL.scopeViews.get(scope).viewName, scope, dataQueue.symbolData.tail.idx);
+    if (dev.viewerActive && typeof appendMapElements !== 'undefined' && dev.scopeViews.get(scope) && ( (dev.scopeViews.get(dev.viewerTabCurrent)) ? dev.scopeViews.get(dev.viewerTabCurrent).autoRefresh : true)) {
+      console.log(data, Symbol.keyFor(dataSymbol), dev.scopeViews.get(scope).viewName, scope, dataQueue.symbolData.tail.idx);
+      appendMapElements(data, Symbol.keyFor(dataSymbol), dev.scopeViews.get(scope).viewName, scope, dataQueue.symbolData.tail.idx);
     }
-      // nnCL.scopeViewer
+      // dev.scopeViewer
       // scopeViews.set(objName, {Obj:undefined, viewName
   }
   
@@ -72,8 +225,12 @@ class MapQueue {
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
-class nn_CL {
+
+class devision {
   constructor () {
     this.blnSkipAll = false;
     this.currentPriority = 0;
@@ -87,7 +244,7 @@ class nn_CL {
     this.viewerTabCount = 0;
     this.viewerTabCurrent;
     this.viewerTabCurrentType;
-    this.end = Symbol.for('5a20286cd4e5aefb503d46235a20286d237ea5e45cff8abc'); // Jac's parsing placeholder ☺ ... should be the final argument for all watch() & test() functions
+    this.end = Symbol('5a20286cd4e5aefb503d46235a20286d237ea5e45cff8abc'); // Jac's parsing placeholder ☺ ... should be the final argument for all watch() & test() functions
     // 5a20286cd4e5aefb503d4623 GUID from  NinjaNineServer  on Thu Nov 30 2017 10:49:00 GMT-0500 (Eastern Standard Time) from ObjectId();Date(); (MongoDB 3.4.10)
     // 5a20286d237ea5e45cff8abc GUID from  GeoTech (Laptop) on Thu Nov 30 2017 10:49:01 GMT-0500 (Eastern Standard Time) from ObjectId();Date(); (MongoDB 3.4.9 )
     // Collision Rate for Jac...    1  -in-  5.041e+74    ... yep, that's a 5 with 74 zeros after it 🐉
@@ -137,8 +294,8 @@ class nn_CL {
           }
         }
         else if (scope) {
-          // console.log("IN [nnCL.js] >>> else if (scope) >>>", logMsg, priority, logString, scope);
-          console.log("IN [nnCL.js] >>> else if (scope) >>>", logMsg, priority, scope);
+          // console.log("IN [dev.js] >>> else if (scope) >>>", logMsg, priority, logString, scope);
+          console.log("IN [dev.js] >>> else if (scope) >>>", logMsg, priority, scope);
           this.watcher.enqueue(logMsg, scope);
         }
       }
@@ -146,12 +303,17 @@ class nn_CL {
       let ternaryResult = ( (this.scopeViews.get(this.viewerTabCurrent)) ? this.scopeViews.get(this.viewerTabCurrent).autoRefresh : true); 
       // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ternary result", ternaryResult);  
       if (this.viewerActive && typeof appendMapElements !== 'undefined' && ( (this.scopeViews.get(this.viewerTabCurrent)) ? this.scopeViews.get(this.viewerTabCurrent).autoRefresh : true))
-        appendMapElements(nnCL.consoleData.tail.data, nnCL.consoleData.tail.ts, 'Tab0', 'Console', nnCL.consoleData.tail.idx);
+        appendMapElements(dev.consoleData.tail.data, dev.consoleData.tail.ts, 'Tab0', 'Console', dev.consoleData.tail.idx);
     }
+  }
+
+  passThru (logMsg, priority = 0, scope) {
+    log(logMsg, priority = 0, scope);
+    return logMsg
   }
   
   watch (item) {
-    let copy = Object.assign({}, item);
+    let copy = JSON.parse( JSON.stringify( item ) );
     this.watcher.push({item:copy, ts:Date()});
   }
   
@@ -249,7 +411,7 @@ class nn_CL {
     
       // document.body.write( templateViewer);
       let newTabID = newTab('Console', 'addTabForm');
-      nnCL.scopeViewer('Console', newTabID);
+      dev.scopeViewer('Console', newTabID);
       //  openTab(event, newTabID);
   
       //  openTab causes an error ...
@@ -257,7 +419,7 @@ class nn_CL {
       
       // testView.js:29 Uncaught TypeError: Cannot read property 'className' of undefined
       // at openTab (testView.js:29)
-      // at nn_CL.vw (app.js:185)
+      // at devision.vw (app.js:185)
       // at window.onload (testView.js:736)
   
       // BECAUSE openTab's 1st parameter is expecting an evt object & we don't know how to fake instantiate that... yet...  BenJaMin...
@@ -279,16 +441,16 @@ class nn_CL {
   }    
 }
 
-const nnCL = new nn_CL();
+const dev = new devision();
 
-// nnCL.peek Testing >>>
+// dev.peek Testing >>>
 // let a;
 // a = 13;
-// nnCL.peek({a});
+// dev.peek({a});
 // a = [13, 42, 69];
-// nnCL.peek({a});
+// dev.peek({a});
 // a = {a:13, b:{c:42, d:69}};
-// nnCL.peek({a});
+// dev.peek({a});
 // console.log("________________");
 // console.log("________________");
 // console.log("________________");

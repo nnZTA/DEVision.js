@@ -3,21 +3,21 @@ const isBrowser=new Function("try {return this===window;}catch(e){ return false;
 if (isBrowser()) {
   document.addEventListener("DOMContentLoaded", function(event) {
     console.log("IN [configMon.js] DOMContentLoaded");
-    let config = document.getElementById('nnCL_config');
+    let config = document.getElementById('dev_config');
     config['priority'] = config.getAttribute('priority');
 
     console.log('config >>> : ', config);
     console.log('config.priority >>> : ', config.priority);
-    console.log('nnCL.currentPriority >>> : ', nnCL.currentPriority);
-    nnCL.currentPriority = config.priority;
+    console.log('dev.currentPriority >>> : ', dev.currentPriority);
+    dev.currentPriority = config.priority;
     //todo for the front end, need to add button & interface to set priority level and/or have a setInterval check the span attributes
   });
 }
 else {
   const fs = require('fs');
   const path = require('path');
-  // IMPORTANT  --------  USER NEEDS TO INPUT LOCATION OF nnCL CONFIG FILE: 
-  const configFile = path.join(__dirname, '../fileMonitoring/nnCL.config.json'); /**!**/
+  // IMPORTANT  --------  USER NEEDS TO INPUT LOCATION OF dev CONFIG FILE: 
+  const configFile = path.join(__dirname, '../fileMonitoring/dev.config.json'); /**!**/
   
   function getFileCTime(path) {
     return fs.statSync(path).ctimeMs;
@@ -44,9 +44,9 @@ else {
           console.log('config.priority >>> : ', config.priority);
   
   
-          console.log('nnCL.currentPriority >>> : ', nnCL.currentPriority);
-          nnCL.currentPriority = config.priority;
-          console.log('nnCL.currentPriority >>> : ', nnCL.currentPriority);
+          console.log('dev.currentPriority >>> : ', dev.currentPriority);
+          dev.currentPriority = config.priority;
+          console.log('dev.currentPriority >>> : ', dev.currentPriority);
           
   
           // LOGIC goes above ^ 

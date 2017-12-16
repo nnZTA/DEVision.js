@@ -1,5 +1,5 @@
 { 
-  "sample nnCL config": "sample nnCL config ~ used for node.js side apps",
+  "sample dev config": "sample dev config ~ used for node.js side apps",
   "priority": "VI",
   "watch": "WATCHING",
   "extensions": [".js", ".jsx"]

@@ -201,3 +201,6 @@ tr:hover {background-color: #ddd;}
   /* text-align: center; */
   margin-bottom: 10px;
 }
+.footerNavButton:focus {
+  background-color:rgba(218, 33, 33, 0.646);
+}
