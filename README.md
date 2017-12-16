@@ -158,9 +158,9 @@ dev.vw(...);
 ```
 
 ## Authors
-    [Ben](https://github.com/benizra2)
-    [George](https://github.com/PracticalCode)
-    [Jacqueline](https://github.com/jqw-chang)
+    [**Ben**](https://github.com/benizra2)
+    [**George**](https://github.com/PracticalCode)
+    [**Jacqueline**](https://github.com/jqw-chang)
 
 ## License
 This project is licensed under the MIT License
