@@ -44,8 +44,8 @@ const dev = require("devision.js");
 #### Setup in Front-End
 ```html
 <head>
-    <script src="https://rawgit.com/nnZTA/DEVision.js/master/library/devisionView.js"></script>
-    <script src="https://rawgit.com/nnZTA/DEVision.js/master/library/devision.js"></script>
+    <script src="https://rawgithub.com/nnZTA/DEVision.js/master/library/devisionView.js"></script>
+    <script src="https://rawgithub.com/nnZTA/DEVision.js/master/library/devision.js"></script>
 </head>
 ```
 <br><br>
