@@ -91,7 +91,11 @@ Database Connection Failure <*critical alert/error*>
 ```
 **...** noting that we can achieve the same "goal" of only seeing the "high priority" items in the second & third examples; however, the first shows only by severity (both file && db) whereas the latter only shows based upon the contextual 'db' scope.
 
-<br><br><br>
+
+<br>
+
+[Back to Top](#toc)
+<br><br>
 
 ## <a name="api"></a>DEVision.js API
 ### dev.log(...) → drop-in replacement for console.log(...)
@@ -148,7 +152,6 @@ dev.watch(...);
 <br>
 
 [Back to Top](#toc)
-
 <br><br>
 
 ## <a name ="export"></a>Exporting Test Scripts:
@@ -290,6 +293,9 @@ dev.vw(...);
 ```
 
 <br>
+
+[Back to Top](#toc)
+<br><br>
 
 ## <a name="authors"></a>Authors
 * [**Ben**](https://github.com/benizra2)
