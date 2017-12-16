@@ -1,7 +1,6 @@
 'use strict';
-/******************* DEVISION VIEWER HTML ****************************/
 
-{/* <link rel="stylesheet" type="text/css" href="../library/style.css"> */}
+/******************************* DEVISION VIEWER HTML + CSS ****************************/
 
 const templateViewer = `
 <!DOCTYPE html>
@@ -315,9 +314,7 @@ tr:hover {background-color: #ddd;}
 
 
 
-
-
-console.log("*****************************TESTVIEW JS ************************TESTVIEW JS *******TESTVIEW JS ***************************");
+/****************************** DEVISION VIEWER JS ****************************/
 
 let active; //to be used on openTab(evt, tab) and on context of verticalScroll(x, y, blnMouseHeld)
 // let a = 1; //temporary to name newly created tabs;
