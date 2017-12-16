@@ -44,9 +44,8 @@ const dev = require("devision.js");
 #### Setup in Front-End
 ```html
 <head>
-    <script src="../node_modules/devision.js/library/devision.js"></script>
-    <script src="../node_modules/devision.js/library/testViewHTML.js"></script>
-    <script src="../node_modules/devision.js/library/testView.js"></script>
+    <script src="https://raw.githubusercontent.com/nnZTA/DEVision.js/master/library/devisionView.js"></script>
+    <script src="https://raw.githubusercontent.com/nnZTA/DEVision.js/master/library/devision.js"></script>
 </head>
 ```
 <br><br>
@@ -284,7 +283,7 @@ dev.all(..., dev.end);
 <br><br>
 
 ## <a name="utils"></a> dev Utils
-### dev.JSs(...) → JSON.stringify(...)
+### dev.JSs(...) → JSON.stringify(..., null, 2)
 ```js
 dev.JSs(...);
 ```
