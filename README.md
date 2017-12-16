@@ -37,6 +37,10 @@ DEVision is intended as a drop-in replacement for console.log, with the followin
 <br>
 
 # <a name="setup"></a>DEVision.js Setup #
+#### Installation:
+```
+npm install devision.js --save dev
+```
 #### Setup in Node.js
 ```js
 const dev = require("devision.js");
@@ -44,8 +48,8 @@ const dev = require("devision.js");
 #### Setup in Front-End
 ```html
 <head>
-    <script src="https://cdn.rawgit.com/nnZTA/DEVision.js/master/library/devisionView.js"></script>
-    <script src="https://cdn.rawgit.com/nnZTA/DEVision.js/master/library/devision.js"></script>
+    <script src="https://rawgit.com/nnZTA/DEVision.js/master/library/devision.js"></script>
+    <script src="https://rawgit.com/nnZTA/DEVision.js/master/library/devisionView.js"></script>
 </head>
 ```
 <br><br>
