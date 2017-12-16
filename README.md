@@ -46,7 +46,7 @@ const dev = require(devision.js);
 </head>
 ```
 
-# <a name="Usage"></a>DEVision.js HowTo #
+# <a name="usage"></a>DEVision.js HowTo #
 ## Usage in General ☺
 In fullfilling DEVision's primary purpose of being a drop-in replacement for ```console.log``` it is easiest to think of it as a Log Butler that takes care of your diagnostic household.  As is the Butler, it will be the gatekeeper for access to your logs.  There are two primary methods (during runtime) which allow you to control your diagnostic data flow:
 ```
