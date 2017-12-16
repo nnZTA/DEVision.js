@@ -4,7 +4,7 @@
 
 /****************** HELPER FUNCTION ******************/
 
-
+  
 Array.prototype.arrayHasIntersection = function (compareToArr) {  
   for (let i = 0; i < compareToArr.length; i += 1) {
     for (let j = 0; j < this.length; j += 1) {
@@ -248,7 +248,7 @@ class devision {
     // 5a20286cd4e5aefb503d4623 GUID from  NinjaNineServer  on Thu Nov 30 2017 10:49:00 GMT-0500 (Eastern Standard Time) from ObjectId();Date(); (MongoDB 3.4.10)
     // 5a20286d237ea5e45cff8abc GUID from  GeoTech (Laptop) on Thu Nov 30 2017 10:49:01 GMT-0500 (Eastern Standard Time) from ObjectId();Date(); (MongoDB 3.4.9 )
     // Collision Rate for Jac...    1  -in-  5.041e+74    ... yep, that's a 5 with 74 zeros after it 🐉
-}
+  }
   
   log(logMsg, priority = 0, scope) {
     // if (priority >= this.currentPriority && (!scope || (-1 !== this.currentScope.indexOf(scope)))) {
@@ -441,7 +441,9 @@ class devision {
   }    
 }
 
-const dev = new devision();
+// const dev = new devision();
+
+module.exports = new devision();
 
 // dev.peek Testing >>>
 // let a;

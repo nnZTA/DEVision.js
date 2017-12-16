@@ -7,7 +7,7 @@ DEVision is intended as a drop-in replacement for console.log, with the followin
  - Isomorphic
  - Elegant API
  - Browser/Platform Independent
- - *... did we mention, Fast?*
+ - *... did we mention, Fast?* 
 
 
 # <a name="toc"></a>Table of contents
@@ -44,16 +44,15 @@ const dev = require("devision.js");
 #### Setup in Front-End
 ```html
 <head>
-    <script src="../devision/linkedList.js"></script>
-    <script src="../devision/testViewHTML.js"></script>
-    <script src="../devision/testView.js"></script>
-    <script src="../devision/devision.js"></script>
+    <script src="../node_modules/devision.js/library/devision.js"></script>
+    <script src="../node_modules/devision.js/library/testViewHTML.js"></script>
+    <script src="../node_modules/devision.js/library/testView.js"></script>
 </head>
 ```
 <br><br>
 
 # <a name="usage"></a>DEVision.js HowTo #
-## Usage in General ☺
+## Usage in General 
 In fullfilling DEVision's primary purpose of being a drop-in replacement for ```console.log``` it is easiest to think of it as a Log Butler that takes care of your diagnostic household.  As is the Butler, it will be the gatekeeper for access to your logs.  There are two primary methods (during runtime) which allow you to control your diagnostic data flow:
 ```
     dev.currentPriority = 0;
@@ -167,10 +166,16 @@ or for only one test case for one objectToTest
 dev.test(objToTest, {}, dev.end);
 ```
 dev.test currently only supports these tape assertions: 
-<br>[equal, notEqual, deepEqual, notDeepEqual, deepLooseEqual, notDeepLooseEqual, ok, notOk, error, comment]
+<br>equal, notEqual, deepEqual, notDeepEqual, deepLooseEqual, notDeepLooseEqual, ok, notOk, error, comment
 ```js 
+----- inside srcFile.js:
+
 function addTwo(num){
     return num + 2; 
+}
+
+module.exports = {
+    addTwo
 }
 ```
 
@@ -257,10 +262,10 @@ dev.test(addTwo,
 output in exported test file: 
 ```js
     test('TESTING addTwo', (t) => {
-        t.equal(addTwo(2), 4, 'should equal to 4');
-        t.notEqual(addTwo(2), 100, 'should not equal to 100!');
-        t.error(addTwo(3), 'uh oh');
-        t.notOk(addTwo(2));
+        t.equal(srcFile.addTwo(2), 4, 'should equal to 4');
+        t.notEqual(srcFile.addTwo(2), 100, 'should not equal to 100!');
+        t.error(srcFile.addTwo(3), 'uh oh');
+        t.notOk(srcFile.addTwo(2));
     })
 ```
 
@@ -294,6 +299,7 @@ dev.vw(...);
 
 <br>
 
+### *Multiply your productivity by using DEVision.js!* ☺
 [Back to Top](#toc)
 <br><br>
 
