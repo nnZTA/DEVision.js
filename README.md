@@ -180,6 +180,8 @@ dev.test(addTwo,
 ```
 
 #### Assertion types: ok, notOk
+ok : Assert that value is <i>truthy</i>
+<br>notOk : Assert that value is <i>falsy</i>
 ```js
 dev.test(addTwo, 
     {
@@ -204,7 +206,7 @@ dev.test(addTwo,
 ```
 
 #### Assertion type: comment
-Print a message without breaking the tap output. (Useful when using e.g. tap-colorize where output is buffered & console.log will print in incorrect order vis-a-vis tap output.)
+Print a message without breaking the tap output.
 ```js
 dev.test(addTwo,
     {
@@ -244,7 +246,7 @@ dev.test(addTwo,
     dev.end
 );
 ```
-output: 
+output in exported test file: 
 ```js
     test('TESTING addTwo', (t) => {
         t.equal(addTwo(2), 4, 'should equal to 4');
