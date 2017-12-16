@@ -312,10 +312,8 @@ tr:hover {background-color: #ddd;}
 `;
 
 
-
-
 /****************************** DEVISION VIEWER JS ****************************/
-let dev = devision();
+let dev = new devision();
 let active; //to be used on openTab(evt, tab) and on context of verticalScroll(x, y, blnMouseHeld)
 // let a = 1; //temporary to name newly created tabs;
 let formDiv = false;
