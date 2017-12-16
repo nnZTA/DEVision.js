@@ -10,7 +10,7 @@ DEVision is intended as a drop-in replacement for console.log, with the followin
  - *... did we mention, Fast?*
 
 
-# Table of contents
+# <a name="toc"></a>Table of contents
 - [Authors](#authors)
 - [Overview](#overview)
 - [Setup](#setup)
@@ -145,7 +145,12 @@ dev.track(...);
 dev.watch(...);
 ```
 
-<br><br><br>
+<br>
+
+[Back to Top](#toc)
+
+<br><br>
+
 ## <a name ="export"></a>Exporting Test Scripts:
 ### dev.test(...) → used to generate Tape Test files (and in the future, possibly code coverage)
 #### dev.end → property used by dev.test(...)
@@ -258,7 +263,6 @@ output in exported test file:
 
 <br><br>
 
-
 ### dev.all(...) → "full-monty" dev function, same as calling [log && track &&|| test]
 ```js
 // ... === <exp||clcsv>, objToTest, testCases, priority = 0, scope
@@ -266,7 +270,10 @@ dev.all(..., dev.end);
 ```
 
 
-<br><br><br><br>
+<br>
+
+[Back to Top](#toc)
+<br><br>
 
 ## <a name="utils"></a> dev Utils
 ### dev.JSs(...) → JSON.stringify(...)
@@ -281,7 +288,6 @@ dev.JSp(...);
 ```js
 dev.vw(...);
 ```
-
 
 <br>
 
@@ -300,3 +306,9 @@ If you would like to contribute, submit a pull request and update the README.md 
 ## <a name="license"></a>License
 <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 </center>
+
+<br>
+
+[Back to Top](#toc)
+
+<br><br>
