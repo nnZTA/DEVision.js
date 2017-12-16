@@ -161,7 +161,7 @@ function perfTS() {
     ts = window.performance.now().toFixed(4);
   }
 
-  return perfTS;
+  return ts;
 }
 
 
