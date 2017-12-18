@@ -324,10 +324,10 @@ let formDiv = false;
 function openTab(evt, tab) { 
   // dev.peek({evt});
   // console.log("evt.currentTarget.id === ", evt.currentTarget.id.replace("Tab", ""));
-  console.log("IN [testView.js] >>> function openTab(evt, tab)");
+  // console.log("IN [testView.js] >>> function openTab(evt, tab)");
   dev.viewerTabCurrent = evt.currentTarget.id.replace("Tab", "");
-  console.log("evt.currentTarget.class === ", typeof evt.currentTarget);
-  console.log("evt.currentTarget.class === ", evt.currentTarget.className);
+  // console.log("evt.currentTarget.class === ", typeof evt.currentTarget);
+  // console.log("evt.currentTarget.class === ", evt.currentTarget.className);
   dev.viewerTabCurrentType = (evt.currentTarget.className.indexOf('addTabFormClass') > -1) ? 'scope' : 'tracked';
 
   // Declare all letiables
@@ -400,21 +400,15 @@ function tabPlay() {
         }
         else {
           let watchDump = dev.watchDump(dev.viewerTabCurrent);
-          console.log(" tabPlay >>> dev.watchDump('", dev.viewerTabCurrent, "') ===");
+          // console.log(" tabPlay >>> dev.watchDump('", dev.viewerTabCurrent, "') ===");
           console.log(watchDump);
 
-
-
           // todo todo todo ...  I don't understand why I don't need the following...
-
           // if (document.getElementById(dev.viewerTabCurrent+'tbody')) {
           //   document.getElementById(dev.viewerTabCurrent+'tbody').parentNode.removeChild(  document.getElementById(dev.viewerTabCurrent+'tbody')  );
           // }
-          
           // ... except that there's magic in the world?  (... or it's BenJaMin's fault ...)
 
-
-    
           // dev.scopeViewer(dev.viewerTabCurrent, dev.viewerTabCurrent + 'Tab');
           // console.log("dev.scopeViews => ", dev.scopeViews); 
     
@@ -580,7 +574,7 @@ function createConfigForm() {
 function changePriority(e) {
   event.preventDefault();
   let priority = document.getElementById("textFormPriority").value;
-  document.getElementById("statChangePriority").innerText = ""
+  document.getElementById("statChangePriority").innerText = "";
 
   if (!isNaN(priority)) { //inputted data is a number
 
@@ -620,7 +614,7 @@ function newScopeTab(e) {
     }
     
     let scopeListArray = listScopes();
-    console.log("scopeListArray[", scopeListArray.length, "] => ", scopeListArray); 
+    // console.log("scopeListArray[", scopeListArray.length, "] => ", scopeListArray); 
     
     // document.getElementById("addTabStatus").innerText = "";
     // if (!document.getElementById(showScope + 'Tab')) {
@@ -632,13 +626,13 @@ function newScopeTab(e) {
     // }
     
     if (scopeListArray.indexOf(showScope) === -1) {
-      console.log("IN [testView.js] newScopeTab >>> if (scopeListArray.indexOf(showScope) === -1)");
+      // console.log("IN [testView.js] newScopeTab >>> if (scopeListArray.indexOf(showScope) === -1)");
       // console.log("######################## newScopeTab >>> if (scopeListArray.indexOf(showScope) === -1)");
       document.getElementById('addTabStatus').innerText = "";
       if (!document.getElementById(showScope + 'Tab')) {
         newTabID = newTab(showScope, madeFrom);
         dev.scopeViewer(showScope, newTabID);
-        console.log("dev.scopeViews => ", dev.scopeViews); 
+        // console.log("dev.scopeViews => ", dev.scopeViews); 
         // openTab(event, newTabID);
         document.getElementById(showScope + "Tab").click();
         return;
@@ -655,12 +649,12 @@ function newScopeTab(e) {
     }
     
     let watchDump = dev.watchDump(showScope);
-    console.log(" >>> dev.watchDump('", showScope, "') ===");
-    console.log(watchDump);
+    // console.log(" >>> dev.watchDump('", showScope, "') ===");
+    // console.log(watchDump);
     if (!document.getElementById(showScope+'table')) {
       newTabID = newTab(showScope, madeFrom);
       dev.scopeViewer(showScope, newTabID);
-      console.log("dev.scopeViews => ", dev.scopeViews); 
+      // console.log("dev.scopeViews => ", dev.scopeViews); 
     // console.log("newTabID === ", newTabID);
       let rowCount = 0;
       if (watchDump) {
@@ -687,7 +681,7 @@ function newScopeTab(e) {
       if (!document.getElementById(showScope + 'Tab')) {
         newTabID = newTab(showScope, madeFrom);
         dev.trackViewer(showScope, newTabID);
-        console.log("dev.trackedObjects => ", dev.trackedObjects);      
+        // console.log("dev.trackedObjects => ", dev.trackedObjects);      
         // openTab(event, newTabID);
         document.getElementById(showScope + "Tab").click();
         return;
@@ -706,7 +700,7 @@ function newTab(scope, madeFrom) {
   let className;
 
   //  todo need to refactor 'addTabForm' to 'addScopeForm'
-  console.log("########  [testView.js] function newTab(scope, madeFrom) >>>", madeFrom);
+  // console.log("########  [testView.js] function newTab(scope, madeFrom) >>>", madeFrom);
   if (madeFrom === "addTabForm") {
     className = madeFrom + "Class";
   }
@@ -748,7 +742,7 @@ function newTab(scope, madeFrom) {
   dev.viewerTabCount += 1;
   //console.log('in index.js ---- newTab() invoked');
   if (madeFrom === "addTrackForm") {
-    console.log("########  [testView.js] appendMapElementsappendMapElementsappendMapElements >>>");
+    // console.log("########  [testView.js] appendMapElementsappendMapElementsappendMapElements >>>");
     // appendMapElements('Not Implemented Yet... Error Code 42. ', window.performance.now().toFixed(4), newTabID, showScope,  '<span style="font-size:25px;"> &#x1F409;</span>');  // &#x1F409; === dragon emoji      
     appendMapElements('<strong><em>Not Implemented Yet...</em> Error Code 42.</strong>', window.performance.now().toFixed(4), newDiv.id, scope,  '<span style="font-size:25px;">&#x1F409;</span>');  // &#x1F409; === dragon emoji      
   }
@@ -763,31 +757,31 @@ function closeNavTab(e, id, tabPageId) {
   document.getElementById(tabPageId).parentNode.removeChild(document.getElementById(tabPageId));
   // console.log('this is the PARENT=========>', document.getElementById(id));
   let currentName = e.parentNode.id.replace('Tab', '');
-  console.log("currentName === ", currentName);
+  // console.log("currentName === ", currentName);
   if (e.parentNode.classList.contains('addTrackFormClass'))
   {
-    console.log("dev.trackedObjects => ", dev.trackedObjects);
+    // console.log("dev.trackedObjects => ", dev.trackedObjects);
     let trackedObject = dev.trackedObjects.get(currentName);
-    console.log("trackedObject === ", trackedObject);
+    // console.log("trackedObject === ", trackedObject);
     if (trackedObject.Obj) {
       trackedObject.viewName = undefined;
     } 
     else {
       dev.trackedObjects.delete(currentName);
     }
-    console.log("dev.trackedObjects => ", dev.trackedObjects);
+    // console.log("dev.trackedObjects => ", dev.trackedObjects);
   }
   else { 
-    console.log("dev.scopeViews => ", dev.scopeViews);
+    // console.log("dev.scopeViews => ", dev.scopeViews);
     let scopeView = dev.scopeViews.get(currentName);
-    console.log("scopeView === ", scopeView);
+    // console.log("scopeView === ", scopeView);
     if (scopeView.Obj) {
       scopeView.viewName = undefined;
     } 
     else {
       dev.scopeViews.delete(currentName);
     }
-    console.log("dev.scopeViews => ", dev.scopeViews);
+    // console.log("dev.scopeViews => ", dev.scopeViews);
   }
 
   // console.log("this is the name of tracked object", e.parentNode.id.replace('Tab', ''));  
@@ -886,7 +880,7 @@ function appendScopeElements(cell) {
 //used to create table for data for scopes appended to div id="tabRibbon";
 function addTable(parentElement, scope = '') {
   
-  console.log('parent element, ===========>',parentElement);
+  // console.log('parent element, ===========>',parentElement);
 
   let table = document.createElement('table');
   table.setAttribute("id", scope+'table');
@@ -917,7 +911,7 @@ function addTable(parentElement, scope = '') {
 //used to append data to table for data for scopes appended to div id="tabRibbon";
 function appendMapElements(value, key, parentElement, scope = '', rowCount) {
 
-  console.log("IN appendMapElements >>> scope === ", scope); 
+  // console.log("IN appendMapElements >>> scope === ", scope); 
 
   // let poppedRow = dev.scopeViews.get(scope).viewRowManager.addLast(rowCount);
   // if (poppedRow) {
@@ -944,7 +938,7 @@ function appendMapElements(value, key, parentElement, scope = '', rowCount) {
 
   
   if (!document.getElementById(scope+'table')) {
-      addTable(parentElement, scope);
+    addTable(parentElement, scope);
   } 
 
   let table = document.getElementById(scope+'tbody');
@@ -1177,7 +1171,7 @@ function prepViewer () {
  }
  /******************************END FOR MANUAL RESIZING BY DRAGGING*************************/
 
- console.log("all this shite should run now...");
+
 //  dev.vw();
 
 }

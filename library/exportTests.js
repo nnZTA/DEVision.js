@@ -207,7 +207,7 @@ async function getGitIgnore(fileName) { // To access .gitIgnore file to grab fil
     ignoreMap.set('.vscode');
     ignoreMap.set('webpack.config.js');
     ignoreMap.set('DEV_Tests');
-    ignoreMap.set('devision');
+    ignoreMap.set('library');
     ignoreMap.set('README.md');
 
     let data = await getFileContent('.gitignore');
