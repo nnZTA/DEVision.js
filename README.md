@@ -146,9 +146,11 @@ dev.trace(...);
 ```js
 dev.track(...);
 ```
-### dev.watch(...) → everything but test
+### dev.watch(...) → "full-monty" dev function, same as calling [log && track]
 ```js
-dev.watch(...);
+// ... === <exp||clcsv>, object, testCases, priority = 0, scope
+```js
+dev.watch(...); 
 ```
 
 <br>
@@ -159,6 +161,11 @@ dev.watch(...);
 ## <a name ="export"></a>Exporting Test Scripts:
 ### dev.test(...) → used to generate Tape Test files (and in the future, possibly code coverage)
 #### dev.end → property used by dev.test(...)
+
+#### Make sure to include this script inside your package.json to export:
+```js
+    "export": "node ./node_modules/devision.js/library/exportTests.js"
+```
 
 for multiple test cases for one objectToTest
 ```js
@@ -272,15 +279,7 @@ output in exported test file:
     })
 ```
 
-<br><br>
-
-### dev.all(...) → "full-monty" dev function, same as calling [log && track &&|| test]
-```js
-// ... === <exp||clcsv>, objToTest, testCases, priority = 0, scope
-dev.all(..., dev.end);
-```
-
-
+Please follow the format in order for all test scripts to be exported correctly!
 <br>
 
 [Back to Top](#toc)
