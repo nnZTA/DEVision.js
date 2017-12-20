@@ -39,7 +39,7 @@ DEVision is intended as a drop-in replacement for console.log, with the followin
 # <a name="setup"></a>DEVision.js Setup #
 #### Installation:
 ```
-npm install devision.js --save dev
+npm install devision.js
 ```
 #### Setup in Node.js
 ```js
